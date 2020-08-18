@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Новая запись{% endblock %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 p-5">
+        <div class="card">
+
+            {% url 'new_post' as new_post %}
+            {% if request.path == new_post %}
+            <div class="card-header">Добавить запись</div>
+            {% else %}
+            <div class="card-header">Редактировать запись</div>
+            {% endif %}
+
+            <div class="card-body">
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                         <div class="form-group row" aria-required="true">
+                                <label for="{{ field.id_for_label }}" class="col-md-4 col-form-label text-md-right">{{ field.label }}</label>
+                                <div class="col-md-6">
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                    <small id="{{ field.id_for_label }}-help" class="form-text text-muted">{{ field.help_text|safe }}</small>
+                                    {% endif %}
+                                </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="col-md-6 offset-md-4">
+                            {% url 'new_post' as new_post %}
+                            {% if request.path == new_post %}
+                            <button type="submit" class="btn btn-primary">
+                                Добавить
+                            </button>
+                            {% else %}
+                            <button type="submit" class="btn btn-primary">
+                                Сохранить
+                            </button>
+                            {% endif %}
+
+                    </div>
+                </form>
+
+            </div> <!-- card body -->
+        </div> <!-- card -->
+    </div> <!-- col -->
+</div> <!-- row -->
+{% endblock %}
