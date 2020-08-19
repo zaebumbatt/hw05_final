@@ -9,8 +9,10 @@ from .models import Follow, Group, Post, User
 
 
 def index(request):
-    post_list = Post.objects.select_related('group').\
+    post_list = (
+        Post.objects.select_related('group').
         order_by('-pub_date').all()
+    )
     paginator = Paginator(post_list, 10)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
@@ -142,9 +144,7 @@ def add_comment(request, username, post_id):
 
 @login_required
 def follow_index(request):
-    user = request.user
-    authors = user.follower.all().values_list('author')
-    post_list = Post.objects.filter(author__in=authors)
+    post_list = Post.objects.filter(author__following__user=request.user)
     paginator = Paginator(post_list, 10)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)

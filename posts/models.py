@@ -49,7 +49,7 @@ class Follow(models.Model):
                                related_name='following')
 
     class Meta:
-        unique_together = [['user', 'author']]
+        unique_together = ('user', 'author')
 
     def __str__(self):
         return f'{self.user} followed {self.author}'
