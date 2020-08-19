@@ -4,12 +4,12 @@
 {% block content %}
 <div class="container">
 
-    {% include "menu.html" with index=True %}
+    {% include "includes/menu.html" with index=True %}
 
         <h1>Последние обновления автора</h1>
 
         {% for post in page %}
-            {% include "post_item.html" with post=post %}
+            {% include "includes/post_item.html" with post=post %}
         {% endfor %}
 
         {% if page.has_other_pages %}
