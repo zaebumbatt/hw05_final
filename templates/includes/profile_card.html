@@ -22,7 +22,7 @@
                                     Записей: {{ posts_count }}
                                 </div>
                         </li>
-                        {% if request.user != username %}
+                        {% if request.user != username and created != None %}
                         <li class="list-group-item">
                             {% if created %}
                             <a class="btn btn-lg btn-light"

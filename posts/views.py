@@ -62,12 +62,10 @@ def profile(request, username):
     followers = Follow.objects.filter(author=user).count()
     following = Follow.objects.filter(user=user).count()
 
-    created = False
     if request.user.is_authenticated:
-        if len(Follow.objects.filter(user=request.user, author=user)):
-            created = True
-        else:
-            created = False
+        created = Follow.objects.filter(user=request.user, author=user).exists()
+    else:
+        created = None
 
     context = {
         'username': user,

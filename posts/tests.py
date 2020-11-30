@@ -161,6 +161,7 @@ class TestImages(TestCase):
         self.assertContains(response_edit, 'img')
 
         os.remove('media/pil_red.png')
+        os.remove('media/posts/pil_red.png')
 
     def test_wrong_file(self):
         with tempfile.TemporaryFile() as img:
