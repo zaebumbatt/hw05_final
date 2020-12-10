@@ -10,3 +10,4 @@ Sprint 6. Blog platform.
 * Django 
 * Bootstrap
 * unittest
+* PostgreSQL
